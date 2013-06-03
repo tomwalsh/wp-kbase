@@ -50,7 +50,7 @@ class WPKBASE_categories extends base {
 		if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
 			// We have been sent data
 			// let's check it for validity
-			if( strip( $_POST[ 'title' ] ) != '' ) {
+			if( trim( $_POST[ 'title' ] ) != '' ) {
 				if( (int)$_POST[ 'id' ] > 0 ) {
 					// Update an existing title
 				} else {
