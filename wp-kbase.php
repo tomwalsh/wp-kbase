@@ -55,6 +55,7 @@ function wpkbase_admin_init() {
 add_action( 'plugin_loaded', 'wpkbase_init' );
 
 if( is_admin() ) {
+	wp_enqueue_style( 'basic-style', WPKBASE_URL . DS . 'css' . DS . 'style.css' );
 	add_action( 'plugins_loaded', 'wpkbase_admin_init', 11 );
 } else {
 	add_action( 'plugins_loaded', 'wpkbase_frontend_init', 11 );

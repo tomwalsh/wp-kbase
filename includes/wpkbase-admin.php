@@ -8,6 +8,7 @@ if( !defined( 'WPKBASE_VERSION' ) ) {
 class WPKBASE_Admin {
 	
 	function __construct() {
+		require WPKBASE_PATH . DS . 'includes' . DS . 'admin' . DS . 'base.php';
 		add_action( 'plugins_loaded', array( $this, 'update_db_check' ), 1 );
 		add_action( 'admin_menu', array( $this, 'register_menu' ), 5 );
 	}
@@ -27,11 +28,11 @@ class WPKBASE_Admin {
 	}
 	
 	function categories_page() {
-		
+		require WPKBASE_PATH . DS . 'includes' . DS . 'admin' . DS . 'categories.php';
 	}
 	
 	function articles_page() {
-		
+		require WPKBASE_PATH . DS . 'includes' . DS . 'admin' . DS . 'articles.php';
 	}
 	
 	function update_db_check() {
