@@ -37,26 +37,16 @@ if ( version_compare( PHP_VERSION, '5.2', '<' ) ) {
 define( 'WPKBASE_DB_VERSION', '1.0' );
 define( 'WPKBASE_VERSION', '1.0.0' );
 
-function wpkbase_init() {
-	// Basic Init
-	require WPKBASE_PATH . 'includes' . DS . 'functions.php';
-}
+require WPKBASE_PATH . 'includes' . DS . 'functions.php';
 
-function wpkbase_frontend_init() {
-	// Basic Frontend Init
-	require WPKBASE_PATH . 'includes' . DS  . 'wpkbase-frontend.php';
-}
+add_action( 'init', 'wpkbase_init', 1 );
+add_action( 'wp_logout', 'wpkbase_session_end' );
+add_action( 'wp_login', 'wpkbase_session_end' );
 
-function wpkbase_admin_init() {
-	// Basic Admin Init
-	require WPKBASE_PATH . 'includes' . DS . 'wpkbase-admin.php';
-}
-
-add_action( 'plugin_loaded', 'wpkbase_init' );
 
 if( is_admin() ) {
-	wp_enqueue_style( 'basic-style', WPKBASE_URL . DS . 'css' . DS . 'style.css' );
 	add_action( 'plugins_loaded', 'wpkbase_admin_init', 11 );
+	add_action( 'admin_enqueue_scripts', 'wpkbase_enqueue_styles' );
 } else {
 	add_action( 'plugins_loaded', 'wpkbase_frontend_init', 11 );
 }

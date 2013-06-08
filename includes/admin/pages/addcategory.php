@@ -8,40 +8,35 @@ if( !defined( 'WPKBASE_VERSION' ) ) {
 if( isset( $cat ) && sizeof( $cat ) > 0 ) {
 	$data = $cat;
 } else {
-	$data = array();
+	$data = new stdClass();
 }
 
 $select = array();
-$select[] = array( 'value' => '0', 'name' => 'No parent' );
+$select[] = array( 'value' => '0', 'text' => 'No parent' );
 foreach( $cats as $item ) {
-	$select[] = array( 'value' => $item[ 'id' ], 'name' => $item[ 'title' ] );
+	$select[] = array( 'value' => $item[ 'id' ], 'text' => $item[ 'name' ] );
 }
 
-$this->form( admin_url( 'admin.php?page=wpkbase_categories&wpkbase_task=edit_category&noheader=true' ), 'POST' );
+$this->form( admin_url( 'admin.php?page=wpkbase_categories&wpkbase_task=' . $task . '&noheader=true' ), 'POST' );
 
-if( isset( $data[ 'id' ] ) ) {
-	$id = $data[ 'id' ];
+if( isset( $data->id ) ) {
+	$id = $data->id;
 } else {
 	$id = 0;
 }
 
 $this->input( 'hidden', $id, 'id' );
+?>
 
-echo "<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n";
-echo "<tr><td>\n<label><strong>Parent Category: </strong></label></td><td>\n";
-$this->select( $select, 'parentid', $data[ 'id' ] );
-echo "</td></tr>\n";
-
-echo "<tr><td>\n<label><strong>Title: </strong></label></td><td>\n";
-$this->input( 'text', $data['title'], 'title', 'wpkbase-title-id', 'wpkbase-title' );
-echo "</td></tr>\n";
-
-echo "<tr><td>\n<label><strong>Description: </strong></label></td><td>\n";
-$this->textarea( $data['description'], 'description', 'wpkbase-description-id', 'wpkbase-description' );
-echo "</td></tr>\n";
-
-echo "<tr><td>\n";
-$this->input( 'submit', 'Save Category', 'submit', 'submit-id', 'button-primary'  );
-echo "</td><td>&nbsp;</td>\n";
-
-echo "</table>\n";
+<div id="category-edit">
+	<div id="titlewrap">
+		<h3>Name</h3>
+		<?php $this->input( 'text', esc_attr( @$data->name ), 'name', 'wpkbase-name-id', 'widefat' ); ?>
+	</div>
+	<h3>Description</h3>
+	<?php wp_editor( esc_attr( @$data->description ), 'wpeditor', array('dfw' => true, 'textarea_name' => 'description', 'editor_height' => 100, 'tabindex' => 2 ) ); ?>
+	<br />
+	<?php $this->input( 'submit', 'Save Settings', 'submit', 'submit-category', 'button-primary'  ); ?>
+	<?php if( $id == 0 ): $this->input( 'submit', 'Save Settings and New', 'submit-new', 'submit-new', 'button-primary'  ); endif; ?>
+	<a id="cancel-button" class="button-secondary" href="<?php echo admin_url( 'admin.php?page=wpkbase_categories' ) ?>">Cancel</a>
+</div>
