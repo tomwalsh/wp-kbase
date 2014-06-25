@@ -28,7 +28,7 @@ if ( version_compare( PHP_VERSION, '5.2', '<' ) ) {
 	if ( is_admin() ) {
 		require_once ABSPATH . DS . 'wp-admin' . DS . 'includes' . DS . 'plugin.php';
 		deactivate_plugins( __FILE__ );
-		wp_die( __( 'WordPress KBase requires PHP 5.2 or higher, as does WordPress 3.2 and higher. The plugin has now disabled itself.', 'wp-kbase' ) );
+		wp_die( __( 'WordPress KBase requires PHP 5.2 or higher and WordPress 3.2 and higher. The plugin has now been disabled.', 'wp-kbase' ) );
 	} else {
 		return;
 	}
