@@ -17,5 +17,7 @@ class WPKBASE_Frontend {
 	
 }
 
+
+
 global $wpkbase_frontend;
 $wpkbase_frontend = new WPKBASE_Frontend();
