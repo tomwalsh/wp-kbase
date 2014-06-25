@@ -73,7 +73,7 @@ class WPKBASE_Admin {
 		
 		dbDelta( $sql );
 		
-		$sql = "CREATE TABLE IF NOT EXISTS {$prefix}kbaselinks` (
+		$sql = "CREATE TABLE IF NOT EXISTS {$prefix}kbaselinks (
   		`categoryid` int(10) NOT NULL,
   		`articleid` int(10) NOT NULL,
 		`order` int(3) NOT NULL DEFAULT '0'
