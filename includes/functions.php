@@ -1,7 +1,8 @@
 <?php
 
-function wpkbase_enqueue_styles() {
-	wp_enqueue_style( 'basic-style', plugins_url( '/css/style.css' ));
+function wpkbase_enqueue_admin_styles() {
+	wp_register_style( 'wpkbase-basic-style', WPKBASE_URL . '/css/admin-style.css' );
+	wp_enqueue_style( 'wpkbase-basic-style' );
 }
 
 /** Include the WP_List_Table definition to fix it to a specific version as recommended by WP Codex 

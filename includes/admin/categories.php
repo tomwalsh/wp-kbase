@@ -103,6 +103,20 @@ class WPKBASE_categories extends base {
 	
 	function delete_category() {
 		// This method deletes the category and any underlying articles are disassociated from the category
+		$this->wpdb->query(
+			$this->wpdb->prepare(
+				"DELETE FROM {$this->prefix}kbaselinks 
+				WHERE categoryid = %d",
+				(int)$_GET[ 'catid' ]
+			)
+		);
+		$this->wpdb->query(
+			$this->wpdb->prepare(
+				"DELETE FROM {$this->prefix}kbasecats 
+				WHERE id = %d",
+				(int)$_GET[ 'catid' ]
+			)
+		);
 		wp_redirect( admin_url( 'admin.php?page=wpkbase_categories' ) );
 		exit();
 	}

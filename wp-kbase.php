@@ -52,8 +52,9 @@ function wpkbase_admin_init() {
 
 if( is_admin() ) {
 	//echo '<pre>' . print_r( $wpdb, true ) . "</pre>";
+
 	add_action( 'plugins_loaded', 'wpkbase_admin_init', 11 );
-	add_action( 'wp_enqueue_scripts', 'wpkbase_enqueue_scripts' );
+	add_action( 'admin_enqueue_scripts', 'wpkbase_enqueue_admin_styles' );
 } else {
 	add_action( 'plugins_loaded', 'wpkbase_frontend_init', 11 );
 }

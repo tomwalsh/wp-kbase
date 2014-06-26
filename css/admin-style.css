@@ -1,0 +1,18 @@
+@CHARSET "ISO-8859-1";
+
+th#col_cat_id, th#col_art_id {
+	width: 2.5em;
+}
+
+td.col_cat_id, th.col_art_id {
+	width: 2.5em;
+	padding: 5px 0 5px 10px;
+}
+
+th#col_cat_delete, th#col_art_delete {
+	width: 3em;
+}
+
+td.col_cat_delete, td.col_art_delete {
+	padding: 5px 10px 0px 20px;
+}
