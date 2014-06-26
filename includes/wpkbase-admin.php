@@ -14,17 +14,22 @@ class WPKBASE_Admin {
 	}
 	
 	function register_menu() {
-		add_menu_page( __( 'WordPress KBase Configuration', 'wpkbase' ), __( 'Knowledge Base', 'wpkbase' ), 'manage_options', 'wpkbase_settings', array( $this, 'config_page' ), WPKBASE_URL . 'images/express-icon.png' );
-		add_submenu_page( 'wpkbase_settings', __( 'Categories', 'wpkbase' ), __( 'Categories', 'wpkbase' ), 'manage_options', 'wpkbase_categories', array( $this, 'categories_page' ) );
-		add_submenu_page( 'wpkbase_settings', __( 'Articles', 'wpkbase' ), __( 'Articles', 'wpkbase' ), 'manage_options', 'wpkbase_articles', array( $this, 'articles_page' ) );
+		add_menu_page( __( 'WordPress KBase Configuration', 'wpkbase' ), __( 'Knowledge Base', 'wpkbase' ), 'manage_options', 'wpkbase_manage', array( $this, 'manage_page' ), WPKBASE_URL . 'images/express-icon.png' );
+		add_submenu_page( 'wpkbase_manage', __( 'Categories', 'wpkbase' ), __( 'Categories', 'wpkbase' ), 'manage_options', 'wpkbase_categories', array( $this, 'categories_page' ) );
+		add_submenu_page( 'wpkbase_manage', __( 'Articles', 'wpkbase' ), __( 'Articles', 'wpkbase' ), 'manage_options', 'wpkbase_articles', array( $this, 'articles_page' ) );
+		add_submenu_page( 'wpkbase_manage', __( 'Settings', 'wpkbase' ), __( 'Settings', 'wpkbase' ), 'manage_options', 'wpkbase_settings', array( $this, 'settings_page' ) );
 		
 		global $submenu;
-		if ( isset( $submenu['wpkbase_settings'] ) )
-			$submenu['wpkbase_settings'][0][0] = __( 'Settings', 'wpkbase' );
+		if ( isset( $submenu['wpkbase_manage'] ) )
+			$submenu['wpkbase_manage'][0][0] = __( 'Manage', 'wpkbase' );
 	}
 	
-	function config_page() {
-		require WPKBASE_PATH . DS . 'includes' . DS . 'admin' . DS . 'config.php';
+	function manage_page() {
+		require WPKBASE_PATH . DS . 'includes' . DS . 'admin' . DS . 'manage.php';
+	}
+
+	function settings_page() {
+		require WPKBASE_PATH . DS . 'includes' . DS . 'admin' . DS . 'settings.php';
 	}
 	
 	function categories_page() {

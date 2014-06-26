@@ -6,7 +6,10 @@ class base {
 	
 	protected function header( $text ) {
 		echo "<div class='wrap'>
-		<h2 id='wpkbase-header'>Knowledge Base: {$text}</h2>";
+		<h2 id='wpkbase-header'>
+			<img style='vertical-align: middle;' src='" . WPKBASE_URL . DS . 'images/express-icon-32x32.png' . "'/>
+			&nbsp;Knowledge Base: {$text}
+		</h2>";
 	}
 	
 	protected function footer() {
@@ -28,7 +31,13 @@ class base {
 	protected function select( $data, $name='', $id='wpkbase-select', $selected='' ) {
 		echo "<select name='{$name}'>\n";
 		foreach( $data as $item ) {
-			echo "\t<option value='{$item['value']}'>{$item[ 'name' ]}</option>\n";
+			if( $selected == $item['value'] ) {
+				echo 'foo';
+				$selectedtext = ' selected';
+			} else {
+				$selectedtext = '';
+			}
+			echo "\t<option value='{$item['value']}'" . $selectedtext . ">{$item['name']}</option>\n";
 		}
 		echo "</select>\n";
 	}
