@@ -40,7 +40,7 @@ class WPKBASE_articles extends base {
 	
 	function show() {
 		// Default state - display all the articles
-		$this->header( 'List articles ' . '<a href="' . admin_url( 'admin.php?page=wpkbase_articles&wpkbase_task=add_article' ) . '" class="add-new-h2">Add New</a>' );
+		$this->header( 'List Articles ' . '<a href="' . admin_url( 'admin.php?page=wpkbase_articles&wpkbase_task=add_article' ) . '" class="add-new-h2">Add New</a>' );
 		require WPKBASE_PATH . DS . 'includes' . DS . 'admin' . DS . 'pages' . DS . 'showarticles.php';
 		$this->footer( );
 	}

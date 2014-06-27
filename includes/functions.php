@@ -1,8 +1,14 @@
 <?php
 
-function wpkbase_enqueue_admin_styles() {
-	wp_register_style( 'wpkbase-basic-style', WPKBASE_URL . '/css/admin-style.css' );
+function wpkbase_enqueue_admin() {
+	wp_register_style( 'wpkbase-basic-style', WPKBASE_URL . 'css/admin-style.css' );
+	wp_register_script( 'wpkbase-manage-script', WPKBASE_URL . 'js/admin-script.js', array('jquery', 'jquery-ui-sortable') );
 	wp_enqueue_style( 'wpkbase-basic-style' );
+	
+	$screen = get_current_screen();
+	if( $screen->base == 'toplevel_page_wpkbase_manage' ) {
+		wp_enqueue_script( 'wpkbase-manage-script' );
+	}
 }
 
 /** Include the WP_List_Table definition to fix it to a specific version as recommended by WP Codex 

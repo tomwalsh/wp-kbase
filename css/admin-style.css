@@ -16,3 +16,32 @@ th#col_cat_delete, th#col_art_delete {
 td.col_cat_delete, td.col_art_delete {
 	padding: 5px 10px 0px 20px;
 }
+
+#kbase-header {
+	padding-bottom: 10px;
+}
+
+div.kbase-manage-art-box,
+div.kbase-manage-cat-box {
+	width: 45%;
+	height: 100%;
+	float: left;
+	background-color: #f3f3f3;
+	padding: 1em 2em 1em 2em;
+	border-radius: 10px;
+	border: 1px solid #c3c3c3;
+}
+
+div.kbase-manage-cat-box {
+	float: right;
+}
+
+div.kbase-manage-art-box h2,
+div.kbase-manage-cat-box h2 {
+	padding: 0;
+	border-bottom: 1px solid #999999;
+}
+
+div.clearboth{
+	clear: both;
+}

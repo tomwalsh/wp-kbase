@@ -14,7 +14,7 @@ class WPKBASE_Admin {
 	}
 	
 	function register_menu() {
-		add_menu_page( __( 'WordPress KBase Configuration', 'wpkbase' ), __( 'Knowledge Base', 'wpkbase' ), 'manage_options', 'wpkbase_manage', array( $this, 'manage_page' ), WPKBASE_URL . 'images/express-icon.png' );
+		add_menu_page( __( 'WP Knowledge Base', 'wpkbase' ), __( 'Knowledge Base', 'wpkbase' ), 'manage_options', 'wpkbase_manage', array( $this, 'manage_page' ), WPKBASE_URL . 'images/express-icon.png', 58 );
 		add_submenu_page( 'wpkbase_manage', __( 'Categories', 'wpkbase' ), __( 'Categories', 'wpkbase' ), 'manage_options', 'wpkbase_categories', array( $this, 'categories_page' ) );
 		add_submenu_page( 'wpkbase_manage', __( 'Articles', 'wpkbase' ), __( 'Articles', 'wpkbase' ), 'manage_options', 'wpkbase_articles', array( $this, 'articles_page' ) );
 		add_submenu_page( 'wpkbase_manage', __( 'Settings', 'wpkbase' ), __( 'Settings', 'wpkbase' ), 'manage_options', 'wpkbase_settings', array( $this, 'settings_page' ) );
@@ -52,7 +52,7 @@ class WPKBASE_Admin {
 		require_once ABSPATH . 'wp-admin' . DS . 'includes' . DS . 'upgrade.php';
 		
 		$sql = "CREATE TABLE IF NOT EXISTS {$prefix}kbasecats (
-		id int(10) NOT NULL AUTO_INCREMENT,
+		`id` int(10) NOT NULL AUTO_INCREMENT,
 		`parentid` int(10) NOT NULL DEFAULT '0',
   		`name` text COLLATE utf8_bin NOT NULL,
  		`description` text COLLATE utf8_bin NOT NULL,

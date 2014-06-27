@@ -6,10 +6,10 @@ class base {
 	
 	protected function header( $text ) {
 		echo "<div class='wrap'>
-		<h2 id='wpkbase-header'>
-			<img style='vertical-align: middle;' src='" . WPKBASE_URL . DS . 'images/express-icon-32x32.png' . "'/>
+		<h2 id='kbase-header'>
+			<img style='vertical-align: middle;' src='" . WPKBASE_URL . 'images/express-icon-32x32.png' . "'/>
 			&nbsp;Knowledge Base: {$text}
-		</h2>";
+		</h2>\n";
 	}
 	
 	protected function footer() {
