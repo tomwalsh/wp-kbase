@@ -21,25 +21,45 @@ td.col_cat_delete, td.col_art_delete {
 	padding-bottom: 10px;
 }
 
+div.kbase-manage-page {
+	width: 100%;
+	display: table;
+	border-spacing: 1em;
+}
+
 div.kbase-manage-art-box,
 div.kbase-manage-cat-box {
-	width: 45%;
-	height: 100%;
-	float: left;
+	width: 50%;
+	height: auto;
 	background-color: #f3f3f3;
 	padding: 1em 2em 1em 2em;
 	border-radius: 10px;
 	border: 1px solid #c3c3c3;
-}
+	display: table-cell;
 
-div.kbase-manage-cat-box {
-	float: right;
 }
-
 div.kbase-manage-art-box h2,
 div.kbase-manage-cat-box h2 {
 	padding: 0;
 	border-bottom: 1px solid #999999;
+}
+
+div.kbase-manage-art-list,
+div.kbase-manage-cat-list {
+	padding-top: 1em;
+	padding-bottom: 1em;
+	overflow-y: auto;
+}
+
+div.kbase-manage-art-item,
+div.kbase-manage-cat-item {
+	width: auto;
+	border: 1px solid #999999;
+	background-color: #d9d9d9;
+	padding: .5em;
+	font-weight: bold;
+	margin-bottom: .25em;
+	cursor: move;
 }
 
 div.clearboth{

@@ -9,7 +9,7 @@ class WPKBASE_Admin {
 	
 	function __construct() {
 		require WPKBASE_PATH . DS . 'includes' . DS . 'admin' . DS . 'base.php';
-		add_action( 'plugins_loaded', array( $this, 'update_db_check' ), 1 );
+		add_action( 'plugins_loaded', array( $this, 'update_check' ), 1 );
 		add_action( 'admin_menu', array( $this, 'register_menu' ), 5 );
 	}
 	
@@ -40,7 +40,10 @@ class WPKBASE_Admin {
 		require WPKBASE_PATH . DS . 'includes' . DS . 'admin' . DS . 'articles.php';
 	}
 	
-	function update_db_check() {
+	function update_check() {
+		if( get_site_option( 'kbase_secret' ) === false ) {
+			add_option( 'kbase_secret', sha1( randstring(64) ) );
+		}
 		if( get_site_option( 'kbase_db_version' ) != WPKBASE_DB_VERSION ) {
 			$this->db_install();
 		}
@@ -56,7 +59,7 @@ class WPKBASE_Admin {
 		`parentid` int(10) NOT NULL DEFAULT '0',
   		`name` text COLLATE utf8_bin NOT NULL,
  		`description` text COLLATE utf8_bin NOT NULL,
- 		`order` int(3) NOT NULL DEFAULT '0',
+ 		`ordering` int(3) NOT NULL DEFAULT '0',
   		PRIMARY KEY (`id`),
   		KEY `parentid` (`parentid`),
   		KEY `name` (`name`(64))
@@ -71,7 +74,7 @@ class WPKBASE_Admin {
   		`views` int(10) NOT NULL DEFAULT '0',
   		`useful` int(10) NOT NULL DEFAULT '0',
   		`votes` int(10) NOT NULL DEFAULT '0',
-  		`order` int(3) NOT NULL,
+  		`ordering` int(3) NOT NULL,
   		`parentid` int(10) NOT NULL,
   		PRIMARY KEY (`id`)
 		);";
@@ -81,7 +84,7 @@ class WPKBASE_Admin {
 		$sql = "CREATE TABLE IF NOT EXISTS {$prefix}kbaselinks (
   		`categoryid` int(10) NOT NULL,
   		`articleid` int(10) NOT NULL,
-		`order` int(3) NOT NULL DEFAULT '0'
+		`ordering` int(3) NOT NULL DEFAULT '0'
 		);";
 		
 		dbDelta( $sql );

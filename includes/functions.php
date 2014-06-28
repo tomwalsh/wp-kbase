@@ -2,13 +2,44 @@
 
 function wpkbase_enqueue_admin() {
 	wp_register_style( 'wpkbase-basic-style', WPKBASE_URL . 'css/admin-style.css' );
-	wp_register_script( 'wpkbase-manage-script', WPKBASE_URL . 'js/admin-script.js', array('jquery', 'jquery-ui-sortable') );
+	wp_register_script( 'wpkbase-manage-script', WPKBASE_URL . 'js/admin-script.js', array('jquery', 'jquery-ui-sortable', 'jquery-ui-draggable', 'jquery-ui-droppable') );
 	wp_enqueue_style( 'wpkbase-basic-style' );
 	
 	$screen = get_current_screen();
 	if( $screen->base == 'toplevel_page_wpkbase_manage' ) {
 		wp_enqueue_script( 'wpkbase-manage-script' );
 	}
+}
+
+/* Add an action for my plugin by default */
+add_action( 'wp_ajax_wpkbase_ajax', 'wpkbase_ajax' );
+function wpkbase_ajax() {
+	global $wpdb;
+	$kbase_secret = get_site_option('kbase_secret');
+	$key = (int)$_POST[ 'key' ];
+	if( wp_verify_nonce( $_POST[ 'nonce' ], $kbase_secret . $key ) ) {
+		if( $_POST[ 'task' ] == 'cat_order_update' ) {
+			foreach( $_POST['item'] as $order => $id ) {
+				$wpdb->query(
+					$wpdb->prepare(
+						"UPDATE {$wpdb->prefix}kbasecats SET `ordering` = %d WHERE id = %d", 
+						$order, 
+						$id
+					)
+				);
+			}
+		}
+	}
+	exit();
+}
+
+function randString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $randomString;
 }
 
 /** Include the WP_List_Table definition to fix it to a specific version as recommended by WP Codex 
